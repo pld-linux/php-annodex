@@ -1,0 +1,52 @@
+--- phpannodex-0.4/src/phpanx_general.c.orig	2006-01-19 05:19:43.000000000 +0100
++++ phpannodex-0.4/src/phpanx_general.c	2006-11-18 01:56:33.026320250 +0100
+@@ -199,31 +199,6 @@
+ 	
+ }
+ 
+-PHP_FUNCTION(anx_destroy)
+-{
+-	zval* anx_resource;
+-	ANNODEX *anx = NULL;
+-	int result;
+-
+-	/* Process arguments */
+-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", 
+-			&anx_resource) == FAILURE) {
+-		RETURN_NULL();
+-	}
+-	ZEND_FETCH_RESOURCE( anx, ANNODEX*, &anx_resource, -1, 
+-			LE_ANX_HANDLE_NAME, le_anx_handle);
+-
+-	/* Call Annodex function */
+-	result = anx_destroy( anx );
+-
+-	if( result == 0 ) {
+-		RETURN_TRUE;
+-	} else {
+-		RETURN_FALSE;
+-	}
+-	
+-}
+-
+ PHP_FUNCTION(anx_ready)
+ {
+ 	ANNODEX *anx;
+--- phpannodex-0.4/src/phpanx_general.h.orig	2006-01-19 05:19:43.000000000 +0100
++++ phpannodex-0.4/src/phpanx_general.h	2006-11-18 01:58:37.478098000 +0100
+@@ -39,7 +39,6 @@
+ 	PHP_FE(anx_new, NULL)				\
+ 	PHP_FE(anx_flush, NULL)				\
+ 	PHP_FE(anx_close, NULL)				\
+-	PHP_FE(anx_destroy, NULL)			\
+ 	PHP_FE(anx_ready, NULL)				\
+ 	PHP_FE(anx_set_head, NULL)			\
+ 	PHP_FE(anx_get_basetime, NULL)			\
+@@ -57,7 +56,6 @@
+ PHP_FUNCTION(anx_new);
+ PHP_FUNCTION(anx_flush);
+ PHP_FUNCTION(anx_close);
+-PHP_FUNCTION(anx_destroy);
+ PHP_FUNCTION(anx_ready);
+ PHP_FUNCTION(anx_set_head);
+ PHP_FUNCTION(anx_get_presentation_time);
