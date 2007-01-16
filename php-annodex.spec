@@ -1,6 +1,3 @@
-%define		_sysconfdir	/etc/php
-%define		extensionsdir	%(php-config --extension-dir 2>/dev/null)
-
 Summary:	phpannodex - object oriented PHP wrappings for libannodex
 Summary(pl):	phpannodex - obiektowo zorientowany interfejs PHP dla libannodex
 Name:		php-annodex
@@ -15,9 +12,9 @@ URL:		http://www.annodex.net/software/phpannodex/index.html
 BuildRequires:	libannodex-devel
 BuildRequires:	php-devel >= 3:5.0.0
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.322
+BuildRequires:	rpmbuild(macros) >= 1.344
 %{?requires_php_extension}
-Requires:	%{_sysconfdir}/conf.d
+Requires:	php-common >= 4:5.0.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -52,36 +49,34 @@ phpize
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/conf.d
+install -d $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d
 
 %{__make} -C src install \
 	INSTALL_ROOT=$RPM_BUILD_ROOT \
-	EXTENSION_DIR=%{extensionsdir}
+	EXTENSION_DIR=%{php_extensiondir}
 
-cat <<'EOF' > $RPM_BUILD_ROOT%{_sysconfdir}/conf.d/phpannodex.ini
+cat <<'EOF' > $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d/phpannodex.ini
 ; Enable phpannodex extension module
 extension=phpannodex.so
 EOF
 
 install -d $RPM_BUILD_ROOT%{_datadir}/php
-cp -r phpannodex $RPM_BUILD_ROOT%{_datadir}/php
+cp -a phpannodex $RPM_BUILD_ROOT%{_datadir}/php
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-[ ! -f /etc/apache/conf.d/??_mod_php.conf ] || %service -q apache restart
-[ ! -f /etc/httpd/httpd.conf/??_mod_php.conf ] || %service -q httpd restart
+%php_webserver_restart
 
 %postun
 if [ "$1" = 0 ]; then
-	[ ! -f /etc/apache/conf.d/??_mod_php.conf ] || %service -q apache restart
-	[ ! -f /etc/httpd/httpd.conf/??_mod_php.conf ] || %service -q httpd restart
+	%php_webserver_restart
 fi
 
 %files
 %defattr(644,root,root,755)
 %doc LICENCE README
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/conf.d/phpannodex.ini
-%attr(755,root,root) %{extensionsdir}/phpannodex.so
+%config(noreplace) %verify(not md5 mtime size) %{php_sysconfdir}/conf.d/phpannodex.ini
+%attr(755,root,root) %{php_extensiondir}/phpannodex.so
 %{_datadir}/php/phpannodex
