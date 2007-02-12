@@ -1,5 +1,5 @@
 Summary:	phpannodex - object oriented PHP wrappings for libannodex
-Summary(pl):	phpannodex - obiektowo zorientowany interfejs PHP dla libannodex
+Summary(pl.UTF-8):   phpannodex - obiektowo zorientowany interfejs PHP dla libannodex
 Name:		php-annodex
 Version:	0.4
 Release:	1
@@ -26,14 +26,14 @@ C functions that wrap around the libannodex functions and make them
 visible to PHP. The phpannodex classes are PHP5 classes that provide
 an object oriented API for dealing with the phpannodex core.
 
-%description -l pl
-phpannodex to rozszerzenie PHP udostêpniaj±ce obiektowo zorientowany
-interfejs PHP dla libannodex - biblioteki C do obróbki mediów Annodex.
+%description -l pl.UTF-8
+phpannodex to rozszerzenie PHP udostÄ™pniajÄ…ce obiektowo zorientowany
+interfejs PHP dla libannodex - biblioteki C do obrÃ³bki mediÃ³w Annodex.
 
-phpannodex sk³ada siê z dwóch g³ównych czê¶ci. Rdzeñ phpannodex to
-zbiór funkcji C obudowuj±cych funkcje libannodex i czyni±cych je
-widocznymi dla PHP. Klasy phpannodex to klasy PHP5 udostêpniaj±ce
-obiektowo zorientowane API do wspó³pracy z rdzeniem phpannodex.
+phpannodex skÅ‚ada siÄ™ z dwÃ³ch gÅ‚Ã³wnych czÄ™Å›ci. RdzeÅ„ phpannodex to
+zbiÃ³r funkcji C obudowujÄ…cych funkcje libannodex i czyniÄ…cych je
+widocznymi dla PHP. Klasy phpannodex to klasy PHP5 udostÄ™pniajÄ…ce
+obiektowo zorientowane API do wspÃ³Å‚pracy z rdzeniem phpannodex.
 
 %prep
 %setup -q -n phpannodex-%{version}
