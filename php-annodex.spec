@@ -1,5 +1,5 @@
 Summary:	phpannodex - object oriented PHP wrappings for libannodex
-Summary(pl.UTF-8):   phpannodex - obiektowo zorientowany interfejs PHP dla libannodex
+Summary(pl.UTF-8):	phpannodex - obiektowo zorientowany interfejs PHP dla libannodex
 Name:		php-annodex
 Version:	0.4
 Release:	1
