@@ -37,7 +37,7 @@ obiektowo zorientowane API do współpracy z rdzeniem phpannodex.
 
 %prep
 %setup -q -n phpannodex-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 find phpannodex -name '.*.swp' | xargs rm -f
 
